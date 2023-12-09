@@ -2,10 +2,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Calendar {
+    private static Calendar instance;
     private List<Session> sessions;
 
-    public Calendar() {
+    private Calendar() {
         this.sessions = new ArrayList<>();
+    }
+
+    public static Calendar getInstance() {
+        if (instance == null) {
+            instance = new Calendar();
+        }
+        return instance;
     }
 
     public void addSession(Session session) {

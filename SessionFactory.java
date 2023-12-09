@@ -1,18 +1,7 @@
 import java.util.Scanner;
 
 public class SessionFactory {
-    private static SessionFactory instance;
-
-    private SessionFactory() {}
-
-    public static SessionFactory getInstance() {
-        if (instance == null) {
-            instance = new SessionFactory();
-        }
-        return instance;
-    }
-
-    public Session createSessionFromUserInput() {
+    public Session createSessionFromUserInput(SessionType type) {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Enter the of session in this format: dd.MM.yyyy");
@@ -30,8 +19,27 @@ public class SessionFactory {
         System.out.println("Enter attendees: ");
         String attendees = scanner.nextLine();
 
-        Session session = new Session(date, startHour, endHour, title, attendees);
+        switch (type) {
+            case PHOTO:
+                return new PhotoSession(date, startHour, endHour, title, attendees);
+            case VIDEO:
+                System.out.println("Enter video type, long clip, short clip or both");
+                String videoType = scanner.nextLine();
 
-        return session;
+                return new VideoSession(date, startHour, endHour, title, attendees, videoType);
+            case PRODUCT:
+                System.out.println("Enter product type:");
+                String productType = scanner.nextLine();
+
+                System.out.println("Enter number of products:");
+                int numberOfProducts = Integer.parseInt(scanner.nextLine());
+
+                return new ProductSession(date, startHour, endHour, title, productType, numberOfProducts);
+            default:
+                return null;
+        }
+
+//        Session session = new Session(date, startHour, endHour, title, attendees);
+//        return session;
     }
 }

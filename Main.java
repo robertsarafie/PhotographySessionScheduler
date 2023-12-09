@@ -2,13 +2,18 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Calendar myCalendar = new Calendar();
+        Calendar myCalendar = Calendar.getInstance();
         Scanner scanner = new Scanner(System.in);
 
-        SessionFactory sessionFactory = SessionFactory.getInstance();
+        SessionFactory sessionFactory = new SessionFactory();
 
         while (true) {
-            Session session = sessionFactory.createSessionFromUserInput();
+            System.out.println("Choose session type (PHOTO, VIDEO, PRODUCT):");
+            String sessionTypeInput = scanner.nextLine();
+
+            SessionType sessionType = SessionType.valueOf(sessionTypeInput.toUpperCase());
+
+            Session session = sessionFactory.createSessionFromUserInput(sessionType);
             session.setCalendar(myCalendar);
             session.addToCalendar();
 
