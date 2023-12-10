@@ -28,9 +28,6 @@ public class Main {
         for (Session session : myCalendar.getAllSessions()) {
             System.out.println(session);
         }
-
-//        System.out.println("Session created:");
-//        System.out.println(session);
     }
 
 }

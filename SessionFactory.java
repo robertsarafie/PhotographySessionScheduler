@@ -38,8 +38,5 @@ public class SessionFactory {
             default:
                 return null;
         }
-
-//        Session session = new Session(date, startHour, endHour, title, attendees);
-//        return session;
     }
 }
